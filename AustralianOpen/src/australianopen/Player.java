@@ -4,13 +4,30 @@ public class Player extends Participant
 {
     Team team;
     
+    
     public Player()
     {
-        super();
     }
     
-    private enum Team
+    
+    public Player(String country)
+    {
+        super();
+       
+    }
+    
+    public enum Team
     {
         Red, Blue
     }
+    
+    public Team getTeam()
+    {
+        return team;
+    }
+    
+
+    
+         
+            
 }

@@ -7,7 +7,7 @@ public class Game
   private Location location;
   private Playoff playoff;
   private GameType gameType;
-  private ArrayList<Participant> participants;
+  public ArrayList<Participant> participants;
   
   public Game(Location location, Playoff playoff, GameType gameType, Date date)
   {
@@ -34,7 +34,8 @@ public class Game
   
   public void addParticipants()
   {
-  
+      //When adding participant, force choose for teamside
+      //Make sure only max 2 players in each teamside
   }
   
   public Boolean hasPlayers()
