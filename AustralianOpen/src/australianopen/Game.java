@@ -32,6 +32,11 @@ public class Game
       Single, Double
   } 
   
+  public enum Winner
+  {
+      Red, Blue
+  }
+  
   public void addParticipants()
   {
       //When adding participant, force choose for teamside

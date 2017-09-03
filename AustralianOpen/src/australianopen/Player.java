@@ -3,17 +3,17 @@ package australianopen;
 public class Player extends Participant
 {
     Team team;
-    
+    private int wins;
     
     public Player()
     {
+        
     }
     
     
     public Player(String country)
     {
         super();
-       
     }
     
     public enum Team
@@ -26,6 +26,10 @@ public class Player extends Participant
         return team;
     }
     
+    public void addWin()
+    {
+        wins++;
+    }
 
     
          
