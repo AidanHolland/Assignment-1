@@ -10,6 +10,11 @@ public class Participant
     
     public Participant()
     {
+    
+    }
+    
+    public Participant(String name, int age, char gender, String country)
+    {
         name = "Name";
         age = 0;
         gender = 'M';

@@ -60,19 +60,32 @@ public class GameController
         }
         
         
-        System.out.println ("Which team wins this round?");
+        System.out.println ("Which team wins this round? Type Red or Blue");
         input = s.nextLine();
         if(input == "Red" || input == "red")
         {
             
             for(int f = 0; f < game.participants.size(); f++)
             {
-               
+                check = (Player)game.participants.get(f);
+                if(check.getTeam() == Player.Team.Red)
+                {
+                    check.addWin();
+                    System.out.println(check.getName() + " has had a win added!");
+                }
             }
         }
         else if(input == "Blue" || input == "blue")
         {
-            
+             for(int f = 0; f < game.participants.size(); f++)
+            {
+                check = (Player)game.participants.get(f);
+                if(check.getTeam() == Player.Team.Blue)
+                {
+                    check.addWin();
+                    System.out.println(check.getName() + " has had a win added!");
+                }
+            }
         }
         gameHistory.add(game);
         

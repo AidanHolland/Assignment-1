@@ -7,13 +7,13 @@ public class Player extends Participant
     
     public Player()
     {
-        
+       
     }
     
     
-    public Player(String country)
+    public Player(String name, int age, char gender, String country)
     {
-        super();
+        super(name, age, gender, country);
     }
     
     public enum Team
