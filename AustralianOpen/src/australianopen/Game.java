@@ -8,6 +8,7 @@ public class Game
   private Playoff playoff;
   private GameType gameType;
   public ArrayList<Participant> participants;
+  private Player winner;
   
   public Game(Location location, Playoff playoff, GameType gameType, Date date)
   {
@@ -41,6 +42,11 @@ public class Game
   {
       //When adding participant, force choose for teamside
       //Make sure only max 2 players in each teamside
+  }
+  
+  public void setWinner(Player winner)
+  {
+      this.winner = winner;
   }
   
   public Boolean hasPlayers()
