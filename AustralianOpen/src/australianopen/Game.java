@@ -1,6 +1,7 @@
 package australianopen;
 import java.util.*;
 
+
 public class Game 
 { 
   private Date date;  
@@ -9,6 +10,8 @@ public class Game
   private GameType gameType;
   public ArrayList<Participant> participants;
   private Player winner;
+  private static int idCount = 0;
+  private int gameID;
   
   public Game(Location location, Playoff playoff, GameType gameType, Date date)
   {
@@ -16,6 +19,8 @@ public class Game
       this.gameType = gameType;
       this.location = location;
       this.playoff = playoff;
+      idCount++;
+      gameID = idCount;
   }
   
   public enum Location
