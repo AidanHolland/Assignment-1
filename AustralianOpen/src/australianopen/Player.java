@@ -1,37 +1,35 @@
 package australianopen;
 
-public class Player extends Participant
+public class Player 
 {
-    Team team;
-    private int wins;
+    private String name;
+    private int age;
+    private char gender;
+    String country;
+    
     
     public Player()
     {
-        
+        name = "Name";
+        age = 0;
+        gender = 'M';
+        country = "Australia";
+                
     }
     
     
-    public Player(String country)
+    public String getName()
     {
-        super();
+        return name;
     }
     
-    public enum Team
+        public String getCountry()
     {
-        Red, Blue
+        return country;
     }
     
-    public Team getTeam()
-    {
-        return team;
-    }
-    
-    public void addWin()
-    {
-        wins++;
-    }
-
-    
-         
-            
 }
+
+
+
+

@@ -4,36 +4,39 @@ import java.util.*;
 
 public class GameController 
 {
-    //If gamecount is gre
-    private int gameCount;
+    //Once gamecount has reached the maximum number of games, then call game end
+    private static int gameCount;
+    private ArrayList<Game> games;
     private ArrayList<Game> gameHistory;
+    
+    public void startTournament()
+    {
+        //Make sure 16 players are added in
+        //
+        
+        
+    }
+    
     
     public void startGame(Game game)
     {
         Game temp = game;
-        if(game.hasPlayers() == true)
+        if(game.readyStart() == true)
         {
-            chooseWinner(temp);
+            game.playGame();
+            //Take winner from game
+            //Make a new game
         }
         else
         {
             System.out.println("Incorrect amount of players");
         }
+        
+        
+        
     }
     
-    public void chooseWinner(Game game)
-    {
-        ArrayList<String> bluePlayers = new ArrayList();
-        ArrayList<String> redPlayers = new ArrayList();
-        Scanner s = new Scanner(System.in);
-        Player check;
-        
-        String input;
-        
-        
-       
-        
-    }
+  
     
     
    
