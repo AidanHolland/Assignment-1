@@ -4,9 +4,10 @@ import java.util.*;
 
 public class GameController 
 {
-    //If gamecount is gre
+    
     private int gameCount;
     private ArrayList<Game> gameHistory;
+    
     
     public void startGame(Game game)
     {
@@ -82,12 +83,13 @@ public class GameController
                 check = (Player)game.participants.get(f);
                 if(check.getTeam() == Player.Team.Blue)
                 {
+                    //Create a new game object
                     check.addWin();
                     System.out.println(check.getName() + " has had a win added!");
                 }
             }
         }
-        gameHistory.add(game);
+        
         
     }
     
