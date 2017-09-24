@@ -31,6 +31,12 @@ public class SaveLoad
     return loaded;
     }
     
+    public String loadPlayers(int times)
+    {
+    //For the amount of times in the loop 
+        return "";
+    }
+    
     
     
 }

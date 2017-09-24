@@ -1,6 +1,7 @@
 package australianopen;
+import java.io.Serializable;
 
-public class Player 
+public class Player implements Serializable
 {
     private String name;
     private int age;
@@ -8,7 +9,7 @@ public class Player
     String country;
     
     
-    public Player()
+    public Player() 
     {
         name = "Name";
         age = 0;
