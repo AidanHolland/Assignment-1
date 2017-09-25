@@ -6,8 +6,8 @@ public class GameController
 {
     //Once gamecount has reached the maximum number of games, then call game end
     private static int gameCount;
-    private ArrayList<Game> games;
-    private ArrayList<Game> gameHistory;
+    private ArrayList<Event> games;
+    private ArrayList<Event> gameHistory;
     private ArrayList<Player> activePlayers;
     
     public void startTournament()
@@ -21,7 +21,7 @@ public class GameController
     }
     
     
-    public void startGame(Game game)
+    public void startGame(Event game)
     {
         if(game.readyStart() == true)
         {

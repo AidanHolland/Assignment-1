@@ -1,13 +1,14 @@
 package australianopen;
 import java.util.*;
-
+import java.io.*;
 
 public class Main 
 {
     String lines = "";
     GameController gc = new GameController();
+    SaveLoad sl = new SaveLoad();
     
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException
     {
        Main main = new Main();
        main.run();
@@ -16,13 +17,19 @@ public class Main
     public void menu()
     {
        
+       System.out.println(lines);
     }
     
-    public void run()
+    public void run() throws IOException
     {
         int choice;
-         for(;;)
+       
+        lines = sl.loadToString("menu.txt");
+        
+        
+        for(;;)
         {
+            
             menu();
             Scanner sc = new Scanner(System.in);
             choice = sc.nextInt();

@@ -7,7 +7,7 @@ public class Player implements Serializable
     private int age;
     private char gender;
     String country;
-    
+    private int id;
     
     public Player() 
     {

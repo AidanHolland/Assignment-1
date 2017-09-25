@@ -1,0 +1,8 @@
+"1.Display registered players" 
+"2.Add player" 
+"3.Run preliminary, write winners to file" 
+"4.Run quarter finals, write winners to file" 
+"5.Run finals, write winners to file" 
+"6.Search for a player by id and display him" 
+"7.Display winners(read from files)" 
+"8.Quit"

@@ -1,6 +1,9 @@
 package australianopen;
 
 import java.io.*;
+import java.io.Serializable;
+import java.nio.file.*;
+import java.util.*;
 
 public class SaveLoad
 {
@@ -15,8 +18,8 @@ public class SaveLoad
         catch(Exception e)
         {
             System.out.println("Exception caught, reason is: " + e);
-        }
-        finally
+        } 
+       finally
         {
            // fw.close();
         }
@@ -24,17 +27,24 @@ public class SaveLoad
     }
     
     
-    public String loadString()
+    public String loadToString(String filePath) throws IOException
     {
-    String loaded = "";
-    
-    return loaded;
+        String load = new String(Files.readAllBytes(Paths.get(filePath)));
+        return load;
     }
     
-    public String loadPlayers(int times)
+    public void savePlayers()
     {
-    //For the amount of times in the loop 
-        return "";
+        //For each player class
+        //Save a player to file
+    }
+    
+    public ArrayList<Player> loadPlayers()
+    {
+        ArrayList<Player> players = null;
+    //For each player class file that has been saved
+    //Load in player object
+        return players;
     }
     
     

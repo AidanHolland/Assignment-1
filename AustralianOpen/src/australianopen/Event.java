@@ -1,8 +1,8 @@
 package australianopen;
 import java.util.*;
+import java.io.*;
 
-
-public class Game 
+public class Event implements Serializable
 { 
   private Date date;  
   private Location location;
@@ -11,7 +11,7 @@ public class Game
   private static int idCount = 0;
   private int gameID;
   
-  public Game(Location location, Date date)
+  public Event(Location location, Date date)
   {
       this.date = date;
     
