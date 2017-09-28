@@ -115,7 +115,7 @@ public class GameController
     {
         for(int i = 0; i < players.size(); i++)
         {
-            System.out.println(i + ": " + players.get(i).getName());
+            System.out.println((i + 1)+ ": " + players.get(i).getName());
         }
     }
     
@@ -123,7 +123,8 @@ public class GameController
     {
         int i;
         Scanner sd = new Scanner(System.in);
-        i = sd.nextInt();
+        System.out.println("Select number of player.");
+        i = sd.nextInt() + 1;
         return players.get(i);
     }
     

@@ -4,28 +4,21 @@ import java.io.*;
 
 public class Event implements Serializable
 { 
-  private Date date;  
-  private Location location;
+  protected Date date;
   public ArrayList<Player> participants;
-  private Player winner;
-  private Boolean finished = false;
-  private static int idCount = 0;
-  private int gameID;
+  protected Player winner;
+  protected Boolean finished = false;
+  static int idCount = 0;
+  protected int gameID;
   GameController gc = GameController.getInstance();
   
-  public Event(Location location, Date date)
+  public Event()
   {
-      this.date = date;
-    
-      this.location = location;
       idCount++;
       gameID = idCount;
   }
   
-  public enum Location
-  {
-      Rod_Laver, Hisense, Margaret_Court
-  }
+  
  
   
   public void addPlayer()
@@ -39,11 +32,7 @@ public class Event implements Serializable
       //Make sure participant is not in any other games currently active.
   }
   
-  public void setWinner(Player winner)
-  {
-      this.winner = winner;
-      this.finished = true;
-  }
+  public abstract void setWinner(Player winner);
   
   
   
