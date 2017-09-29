@@ -7,4 +7,10 @@ public class Final extends Event
     {
         super();
     }
+    
+    @Override
+    public void setWinner(Player winner)
+    {
+        
+    }
 }

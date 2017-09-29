@@ -8,6 +8,11 @@ public class QuarterFinal extends Event
         super();
     }
     
-    
+    @Override
+    public void setWinner(Player winner)
+    {
+        //
+        
+    }
     
 }

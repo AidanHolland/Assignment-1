@@ -10,6 +10,7 @@ public class Player implements Serializable
     String country;
     static int idCount;
     private int pid;
+    GameController gc = GameController.getInstance();
     
     public Player(){}
     
@@ -22,6 +23,7 @@ public class Player implements Serializable
         this.country = country; 
         idCount++;
         pid = idCount;
+        gc.getPlayers().add(this);
     }
     
     
@@ -45,6 +47,11 @@ public class Player implements Serializable
     {
         return "Name: " + firstName + " " + lastName + "\nAge: " + age 
                 + "Gender:"  + gender+ "\nCountry: " + country + ".";
+    }
+    
+    public boolean isInGame()
+    {
+        
     }
     
 }

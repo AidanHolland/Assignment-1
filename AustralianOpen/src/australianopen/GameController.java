@@ -25,11 +25,24 @@ public class GameController
         return gc;
     }
     
-    
+    public void addGame(Event game)
+    {
+        games.add(game);
+    }
     
     public ArrayList<Player> getPlayers()
     {
         return players;
+    }
+    
+    public ArrayList<Event> getGames()
+    {
+        return games;
+    }
+    
+    public ArrayList<Event> getGameHistory()
+    {
+        return gameHistory;
     }
     
     public void startTournament()
@@ -45,7 +58,7 @@ public class GameController
     
     public void startGame(Event game)
     {
-        if(game.readyStart() == true)
+        if(game.readyStart() == 2)
         {
             game.playGame();
             //Take winner from game
@@ -61,6 +74,7 @@ public class GameController
         else
         {
             System.out.println("Incorrect amount of players");
+            //Find a player to add
         }
     }
     
@@ -68,7 +82,8 @@ public class GameController
     
     public void populateGame()
     {
-        //For each game
+        //Create 8 preliminary
+        
     }
     
     public void createPlayer()
@@ -92,8 +107,9 @@ public class GameController
         System.out.println("Country: ");
         country = sc.nextLine();
        
-        
-        players.add(new Player(firstName, lastName, age, gender, country));
+        //Consrtucting player adds them into players
+        Player p = new Player(firstName, lastName, age, gender, country);
+        //Saves players to txt
         savePlayers();
 
         System.out.println("Player created!");
