@@ -49,9 +49,19 @@ public class Player implements Serializable
                 + "Gender:"  + gender+ "\nCountry: " + country + ".";
     }
     
-    public boolean isInGame()
+    public boolean isInAGame()
     {
-        
+        for(int i = 0; i < gc.getGames().size(); i++)
+        {
+            for(int f = 0; f < gc.getGames().get(i).participants.size(); f++)
+            {
+                if(gc.getGames().get(i).participants.get(f).getID() == this.getID())
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
 }

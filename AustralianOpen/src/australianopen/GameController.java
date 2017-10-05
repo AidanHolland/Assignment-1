@@ -82,7 +82,12 @@ public class GameController
     
     public void populateGame()
     {
-        //Create 8 preliminary
+        //Create 8 preliminary games
+        for(int i = 0; i < 8; i++)
+        {
+            Preliminary p = new Preliminary();
+            p.populatePlayers();
+        }
         
     }
     
@@ -135,6 +140,7 @@ public class GameController
         }
     }
     
+    //To be used in conjunction with listPlayers()
     public Player selectPlayer()
     {
         int i;
@@ -143,6 +149,7 @@ public class GameController
         i = sd.nextInt() + 1;
         return players.get(i);
     }
+    
     
     public String searchPlayer(int pid)
     {

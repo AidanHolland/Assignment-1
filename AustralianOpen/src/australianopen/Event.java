@@ -1,6 +1,7 @@
 package australianopen;
 import java.util.*;
 import java.io.*;
+import java.util.Random;
 
 public abstract class Event implements Serializable
 { 
@@ -11,6 +12,7 @@ public abstract class Event implements Serializable
   static int idCount = 0;
   protected int gameID;
   GameController gc = GameController.getInstance();
+  SaveLoad sl = SaveLoad.getInstance();
   
   public Event()
   {
@@ -24,29 +26,46 @@ public abstract class Event implements Serializable
       participants.add(p);
   }
  
-  //Checking for full game
-  public void populatePlayers()
-  {
-      for(int i = 0; i < gc.getPlayers().size();i++)
-      {
-           switch(readyStart())
-           {
-               case 2:
-                   return;
-           }
-           
-      }
-      //Make sure only max 2 players in each teamside
-      //Make sure participant is not in any other games currently active.
-  }
+
+  
   
   //Abstract as we are looking for a different type of event in each subclass
   public abstract void setWinner(Player winner);
   
-  
+  public int getGameID()
+  {
+      return gameID;
+  }
   
   public void playGame()
   {
+      int p1Points = 0;
+      int p2Points = 0;
+    
+      Player p1 = participants.get(1);
+      Player p2 = participants.get(2);
+      
+      Random r = new Random();
+      while(p1Points <= 15 || p2Points <= 15)
+      {
+        int p1Rn = r.nextInt(100);
+        int p2Rn = r.nextInt(100);
+
+        if(p1Rn > p2Rn)
+        {
+            p1Points++;
+        }
+        else if(p2Rn > p1Rn)
+        {
+            p2Points++;
+        }
+          
+      }
+      
+      if(p1Points > p2Points)
+      {
+          
+      }
       //Take both players in list
       //Give players both points
       //Randomly give each player a number
@@ -67,6 +86,7 @@ public abstract class Event implements Serializable
           case 2:
                 return 2;
       }
+      
       return 3;
   }
     

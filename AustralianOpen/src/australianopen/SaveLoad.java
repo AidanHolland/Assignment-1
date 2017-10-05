@@ -23,22 +23,26 @@ public class SaveLoad
         return sl;
     }
     
-    public void save(String s)
+    public void save(String s, String path)
     {
         System.out.println("Enter filename");
-        FileWriter fw = null;
+        FileOutputStream fout = null;
+        ObjectOutputStream oos = null;
+        
         try
         {
-            fw = new FileWriter("Name" + ".txt");
+            fout = new FileOutputStream(path);
+            oos = new ObjectOutputStream(fout);
+            oos.writeBytes(s);
         }      
         catch(Exception e)
         {
             System.out.println("Exception caught, reason is: " + e);
         } 
-       finally
+        finally
         {
-           // fw.close();
-        }
+           closeStreams(fout, oos);
+        } 
         
     }
     
@@ -65,29 +69,7 @@ public class SaveLoad
         }
         finally
         {
-            if(fout != null)
-            {
-                try
-                {
-                    fout.close();
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            
-            if(oos != null)
-            {
-                try
-                {
-                    oos.close();
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
+            closeStreams(fout, oos);
         }
         
     }
@@ -124,6 +106,7 @@ public class SaveLoad
         }
         for(int k = 0; k < currentList.size(); k++)
         {
+            //Get largest ID to make sure we don't overwrite
             if(currentList.get(k).getID() > tempID)
             {
                 tempID = currentList.get(k).getID();
@@ -137,7 +120,32 @@ public class SaveLoad
     }
     
   
-  
+    public void closeStreams(FileOutputStream fout, ObjectOutputStream oos)
+    {
+         if(fout != null)
+            {
+                try
+                {
+                    fout.close();
+                }
+                catch(Exception e)
+                {
+                }
+            }
+            
+            if(oos != null)
+            {
+                try
+                {
+                    oos.close();
+                }
+                catch(Exception e)
+                {
+                }
+            }
+        }
+    }
     
     
-}
+
+
