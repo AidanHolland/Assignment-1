@@ -11,15 +11,15 @@ public class SaveLoad
     String finder = "PLYR.txt";
     GameController gc = GameController.getInstance();
     //Lazy Singleton
-    private static SaveLoad sl = null;
+    private static SaveLoad sl = new SaveLoad();
     private SaveLoad(){}
    
     public static SaveLoad getInstance()
     {
-        if(sl == null)
+        /*if(sl == null)
         {
             sl = new SaveLoad();
-        }
+        }*/
         return sl;
     }
     
@@ -59,13 +59,14 @@ public class SaveLoad
         ObjectOutputStream oos = null;
         try
         {
+            
             fout = new FileOutputStream(finder);
             oos = new ObjectOutputStream(fout);
             oos.writeObject(p);
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Error is: " + e);
         }
         finally
         {
@@ -75,8 +76,8 @@ public class SaveLoad
     }
     
     public ArrayList<Player> loadPlayers() throws IOException, ClassNotFoundException
-    {
-        ArrayList<Player> loadedList = null;
+    {   
+        ArrayList<Player> loadedList = new ArrayList<Player>();
         
         InputStream file = new FileInputStream(finder);
         InputStream buffer = new BufferedInputStream(file);

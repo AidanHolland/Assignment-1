@@ -49,6 +49,7 @@ public class Player implements Serializable
                 + "Gender:"  + gender+ "\nCountry: " + country + ".";
     }
     
+    //Search through all games participants and compare ID
     public boolean isInAGame()
     {
         for(int i = 0; i < gc.getGames().size(); i++)

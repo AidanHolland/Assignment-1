@@ -7,21 +7,24 @@ public class GameController
 {
     //Once gamecount has reached the maximum number of games, then call game end
     private static int gameCount;
-    private ArrayList<Event> games;
+    private ArrayList<Event> games = new ArrayList<Event>();
     //All inactive games go here
-    private ArrayList<Event> gameHistory;
-    private ArrayList<Player> players;
+    private ArrayList<Event> gameHistory = new ArrayList<Event>();
+    private ArrayList<Player> players = new ArrayList<Player>();
     SaveLoad sl = SaveLoad.getInstance();
+    private Boolean prelimPlayed = false;
+    private Boolean quarterPlayed = false;
     
-    private static GameController gc = null;
+    
+    private static GameController gc = new GameController();
     private GameController(){}
    
     public static GameController getInstance()
     {
-        if(gc == null)
+        /*if(gc == null)
         {
-            gc = new GameController();
-        }
+            gc = new GameController();    
+        }*/
         return gc;
     }
     
@@ -45,15 +48,7 @@ public class GameController
         return gameHistory;
     }
     
-    public void startTournament()
-    {
-        //Make sure 16 players are added in
-        //Create 8 preliminaries and add the players into the game
-        for(int i = 0; i < 8; i++)
-        {
-            //Game game = new Game();
-        }
-    }
+  
     
     
     public void startGame(Event game)
@@ -63,11 +58,12 @@ public class GameController
             game.playGame();
             //Take winner from game
             //Save player to winners list file
+            //Move game to game history
+            games.remove(game);
             //Make a new game
+            
             //add player to new game
-            //Add game to game history
-            //Play next game in preliminary
-            //If we have reached the end of the loop, start semi finals
+           
           
             gameHistory.add(game);
         }
@@ -78,7 +74,47 @@ public class GameController
         }
     }
     
+    public void playPrelims()
+    {
+        //Check if prelims have been played, if so, prompt player for restart
+        if(prelimPlayed == true)
+        {
+            System.out.println("");
+            return;
+        }
+        //Loop through all games
+        for(int i = 0; i < games.size(); i++)
+        {
+            startGame(games.get(i));
+        }
+        //Play game
+        //Announce winner
+        //Set that the prelims have been played
+    }
     
+    public void playQuarterFinal()
+    {
+        if(quarterPlayed == true)
+        {
+            return;
+        }
+        //Check if this has been run already
+    }
+    
+    public void playFinal()
+    {
+        
+    }
+    
+    public void finish()
+    {
+    }
+    
+    public void restart()
+    {
+       //Clear all match arrays including history
+        //Set all check variables to false;
+    }
     
     public void populateGame()
     {

@@ -6,7 +6,7 @@ import java.util.Random;
 public abstract class Event implements Serializable
 { 
   protected Date date;
-  public ArrayList<Player> participants;
+  public ArrayList<Player> participants = new ArrayList<Player>();
   protected Player winner;
   protected Boolean finished = false;
   static int idCount = 0;
@@ -64,15 +64,15 @@ public abstract class Event implements Serializable
       
       if(p1Points > p2Points)
       {
-          
+          //Put p1 into winner
+          winner = p1;
+          //
       }
-      //Take both players in list
-      //Give players both points
-      //Randomly give each player a number
-      //Higher number means give that player a point
-      //Reset
-      //When one players point is 15
-      //Set winner(that player)
+      else if(p2Points > p1Points)
+      {
+          winner = p2;
+      }
+     
   }
   
   public int readyStart()

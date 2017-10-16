@@ -24,7 +24,7 @@ public class Main
         int choice;
        
         lines = sl.loadToString("menu.txt");
-        sl.loadPlayers();
+        //sl.loadPlayers();
         
         for(;;)
         {
@@ -41,10 +41,13 @@ public class Main
                     gc.createPlayer();
                     break;
                 case 3:
+                    gc.playPrelims();
                     break;
                 case 4:
+                    gc.playQuarterFinal();
                     break;
                 case 5:
+                    gc.playFinal();
                     break;
                 case 6:
                     System.out.println("Enter the ID of your player");
