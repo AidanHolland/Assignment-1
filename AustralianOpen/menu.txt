@@ -3,6 +3,7 @@
 "2.Add player" 
 
 "3.Run preliminary, write winners to file"
+
 "4.Run quarter finals, write winners to file" 
 
 "5.Run finals, write winners to file" 

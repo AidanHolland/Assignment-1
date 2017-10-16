@@ -8,6 +8,7 @@ public abstract class Event implements Serializable
   protected Date date;
   public ArrayList<Player> participants = new ArrayList<Player>();
   protected Player winner;
+  protected Player loser;
   protected Boolean finished = false;
   static int idCount = 0;
   protected int gameID;
@@ -26,9 +27,6 @@ public abstract class Event implements Serializable
       participants.add(p);
   }
  
-
-  
-  
   //Abstract as we are looking for a different type of event in each subclass
   public abstract void setWinner(Player winner);
   
@@ -66,11 +64,13 @@ public abstract class Event implements Serializable
       {
           //Put p1 into winner
           winner = p1;
-          //
+          loser = p2;
+          
       }
       else if(p2Points > p1Points)
       {
           winner = p2;
+          loser = p1;
       }
      
   }

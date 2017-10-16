@@ -26,6 +26,12 @@ public class Player implements Serializable
         gc.getPlayers().add(this);
     }
     
+    public Player(String firstName, String lastName, int age, char gender, String country, int ID)
+    {
+         this(firstName, lastName, age, gender, country);
+         pid = ID;
+    }
+    
     
     public String getName()
     {

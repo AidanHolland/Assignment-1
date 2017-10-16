@@ -26,7 +26,7 @@ public class Preliminary extends Event
         qf.addPlayer(winner);
         //Save winner details
         sl.save("The winner of preliminary ID: " + this.getGameID() + " is: "
-                + winner.getName(), "Preliminary_Winner" + this.getGameID() + ".txt");
+                + winner.getName(), "winners.txt");
         //Move game to history   
         gc.getGames().remove(this);
         gc.getGameHistory().add(this);
@@ -35,7 +35,7 @@ public class Preliminary extends Event
     }
     
     public void populatePlayers()
-  {
+    {
       for(int i = 0; i < gc.getPlayers().size();i++)
       {
            switch(readyStart())
@@ -50,6 +50,6 @@ public class Preliminary extends Event
       }
       //Make sure only max 2 players in each teamside
       //Make sure participant is not in any other games currently active.
-  }
+    }
     
 }

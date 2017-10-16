@@ -24,7 +24,7 @@ public class Main
         int choice;
        
         lines = sl.loadToString("menu.txt");
-        //sl.loadPlayers();
+       
         
         for(;;)
         {
@@ -36,6 +36,7 @@ public class Main
             switch(choice)
             {
                 case 1:
+                    gc.listPlayers();
                     break;
                 case 2:
                     gc.createPlayer();
@@ -59,6 +60,8 @@ public class Main
                     break;
                 case 8:
                     return;
+                case 9:
+                    sl.loadPlayers();
                             
                           
             }

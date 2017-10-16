@@ -29,11 +29,21 @@ public class SaveLoad
         FileOutputStream fout = null;
         ObjectOutputStream oos = null;
         
+     
         try
         {
-            fout = new FileOutputStream(path);
-            oos = new ObjectOutputStream(fout);
-            oos.writeBytes(s);
+            if(new File(path).isFile())
+            {
+                fout = new FileOutputStream(path, true);
+                oos = new ObjectOutputStream(fout);
+                oos.writeBytes(s);
+            }
+            else
+            {
+                fout = new FileOutputStream(path);
+                oos = new ObjectOutputStream(fout);
+                oos.writeBytes(s);
+            }
         }      
         catch(Exception e)
         {
@@ -45,6 +55,8 @@ public class SaveLoad
         } 
         
     }
+    
+  
     
     
     public String loadToString(String filePath) throws IOException
@@ -62,7 +74,10 @@ public class SaveLoad
             
             fout = new FileOutputStream(finder);
             oos = new ObjectOutputStream(fout);
-            oos.writeObject(p);
+            for(int i = 0; i < p.size(); i++)
+            {
+                oos.writeObject(p.get(i));
+            }
         }
         catch(Exception e)
         {
@@ -75,48 +90,77 @@ public class SaveLoad
         
     }
     
+    
+  
+    
     public ArrayList<Player> loadPlayers() throws IOException, ClassNotFoundException
     {   
         ArrayList<Player> loadedList = new ArrayList<Player>();
+        ArrayList<Player> currentList = new ArrayList<Player>();
         
-        InputStream file = new FileInputStream(finder);
-        InputStream buffer = new BufferedInputStream(file);
-        ObjectInput input = new ObjectInputStream(buffer);
-        int tempID = 0;
-        
-        loadedList = (ArrayList<Player>)input.readObject();
-        ArrayList<Player> currentList = gc.getPlayers();
-        
-        //Find any common instances in both lists
-        for(int i = 0; i < currentList.size(); i++)
+        for(int i = 0; i < GameController.getInstance().getPlayers().size(); i++)
         {
-            for(int j = 0; j < loadedList.size(); j++)
+            currentList.add(GameController.getInstance().getPlayers().get(i));     
+        }
+      
+        try
+        {
+            int tempID = 0;
+            boolean cont = true;
+            FileInputStream fis = new FileInputStream(finder);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            
+            //loadedList = (ArrayList<Player>) ois.readObject();
+            while(cont)
             {
-                //Remove commons instances in loadedList
-                if(currentList.get(i).getID() == loadedList.get(j).getID())
+                Object obj = null;
+                try
                 {
-                    loadedList.remove(j);          
+                    obj = ois.readObject();
+                    if(obj != null)
+                    {
+                        
+                    }
+                    Player p = (Player) ois.readObject();
+                    loadedList.add(p);
+                }
+                catch(FileNotFoundException e)
+                {
                 }
             }
-        }
-        
-        //Add all remaining objects to currentList
-        for(int f = 0; f < loadedList.size(); f++)
-        {
-            currentList.add(loadedList.get(f));
-        }
-        for(int k = 0; k < currentList.size(); k++)
-        {
-            //Get largest ID to make sure we don't overwrite
-            if(currentList.get(k).getID() > tempID)
-            {
-                tempID = currentList.get(k).getID();
-            }
-        }
-        
-        
-        Player.idCount = tempID;
             
+            //Find any common instances in both lists
+            for(int i = 0; i < currentList.size(); i++)
+            {
+                for(int j = 0; j < loadedList.size(); j++)
+                {
+                    //Remove commons instances in loadedList
+                    if(currentList.get(i).getID() == loadedList.get(j).getID())
+                    {
+                        loadedList.remove(j);          
+                    }
+                }
+            }
+
+            //Add all remaining objects to currentList
+            for(int f = 0; f < loadedList.size(); f++)
+            {
+                currentList.add(loadedList.get(f));
+            }
+            for(int k = 0; k < currentList.size(); k++)
+            {
+                //Get largest ID to make sure we don't overwrite
+                if(currentList.get(k).getID() > tempID)
+                {
+                    tempID = currentList.get(k).getID();
+                }
+            }
+            Player.idCount = tempID;
+        }
+        catch(Exception e)
+        {
+            
+        }
         return currentList;
     }
     

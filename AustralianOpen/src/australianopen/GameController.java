@@ -21,10 +21,10 @@ public class GameController
    
     public static GameController getInstance()
     {
-        /*if(gc == null)
+        if(gc == null)
         {
             gc = new GameController();    
-        }*/
+        }
         return gc;
     }
     
@@ -79,7 +79,7 @@ public class GameController
         //Check if prelims have been played, if so, prompt player for restart
         if(prelimPlayed == true)
         {
-            System.out.println("");
+            restart();
             return;
         }
         //Loop through all games
@@ -98,22 +98,52 @@ public class GameController
         {
             return;
         }
+        
+         for(int i = 0; i < games.size(); i++)
+        {
+            startGame(games.get(i));
+        }
         //Check if this has been run already
     }
     
     public void playFinal()
     {
-        
+        for(int i = 0; i < games.size(); i++)
+        {
+            startGame(games.get(i));
+        }
     }
     
     public void finish()
     {
+        
     }
     
     public void restart()
     {
        //Clear all match arrays including history
         //Set all check variables to false;
+        System.out.println("Would you like to restart? Y/N");
+        
+        String choice;
+        Scanner sc = new Scanner(System.in);
+        choice = sc.nextLine();
+        
+        switch(choice)
+        {
+            case "Y":
+            case "y":
+            case "Yes":
+            case "yes":
+                break;
+            case "N":
+            case "n":
+            case "No":
+            case "no":
+                System.exit(0);
+                break;
+        }
+            
     }
     
     public void populateGame()
@@ -163,10 +193,6 @@ public class GameController
         System.out.println("Players saved to file!");
     }
     
-    public void loadPlayers() throws IOException, ClassNotFoundException
-    {
-        players = sl.loadPlayers();
-    }
     
     public void listPlayers()
     {
