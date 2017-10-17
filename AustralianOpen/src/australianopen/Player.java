@@ -58,11 +58,16 @@ public class Player implements Serializable
     //Search through all games participants and compare ID
     public boolean isInAGame()
     {
+        //For each of the games
         for(int i = 0; i < gc.getGames().size(); i++)
         {
-            for(int f = 0; f < gc.getGames().get(i).participants.size(); f++)
+           
+            //For the size of the games participant array
+            for(int f = 0; f < gc.getGames().get(f).getPlayers().size(); f++)
             {
-                if(gc.getGames().get(i).participants.get(f).getID() == this.getID())
+                
+                //If the games participant is the same as this players id
+                if(gc.getGames().get(i).getPlayers().get(f).getID() == this.getID())
                 {
                     return true;
                 }

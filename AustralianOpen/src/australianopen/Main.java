@@ -22,7 +22,7 @@ public class Main
     public void run() throws IOException, ClassNotFoundException
     {
         int choice;
-       
+        gc.loadPlayers();
         lines = sl.loadToString("menu.txt");
        
         
@@ -56,12 +56,16 @@ public class Main
                     System.out.println(gc.searchPlayer(choice));
                     break;
                 case 7:
-                    sl.loadToString("winners.txt");
+                    System.out.println(sl.loadToString("prelimwinners.txt"));
+                    System.out.println(sl.loadToString("qfwinners.txt"));
+                    System.out.println(sl.loadToString("finalwinner.txt"));
                     break;
                 case 8:
                     return;
                 case 9:
-                    sl.loadPlayers();
+                    gc.listCurrentMatches();
+                case 10:
+                    gc.listQF();
                             
                           
             }

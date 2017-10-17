@@ -6,37 +6,38 @@ public class QuarterFinal extends Event
     public QuarterFinal()
     {
         super();
+        gameType = "Quarter Final";
     }
     
-    @Override
+     @Override
     public void setWinner(Player winner)
     {
-    
         //If there is a game not completely filled, add that player into that game
-        for(int i = 0; i < gc.getGames().size(); i++)
+        for(int i = 0; i < gc.getF().size(); i++)
         {
-            if(gc.getGames().get(i).readyStart() == 0 || gc.getGames().get(i).readyStart() == 1)
+            if(gc.getF().get(i).readyStart() == 0 || gc.getF().get(i).readyStart() == 1)
             {
-                addPlayer(winner);
+                gc.getF().get(gc.getF().size() -1).addPlayer(this.winner);
+                sl.save("The winner of QuarterFinal ID: " + this.getGameID() + " is: "
+                + winner.getName(), "qfwinners.txt");
+                gc.getGameHistory().add(this); 
+                System.out.println(winner.getName() + " has won the round! Player added to the Final!");
                 return;
             }
         }
         //If there are no available spots, make a new game
-        Final sf = new Final();
-        sf.addPlayer(winner);
+        Final f = new Final();
+        System.out.println("created a new Final!");
+        f.addPlayer(winner);
         //Save winner details
-        sl.save("The winner of quarter final ID: " + this.getGameID() + " is: "
-                + winner.getName(), "winners.txt");
-        //Move game to history   
-        gc.getGames().remove(this);
-        gc.getGameHistory().add(this);
-        
-        
-        System.out.println(winner.getName() + " has won the round! Player added to the Quarter Final!");
-        
-        
+        sl.save("The winner of QuarterFinal ID: " + this.getGameID() + " is: "
+                + winner.getName(), "qfwinners.txt");
+          
+        gc.getF().add(f);
+        //Move game to history 
+        gc.getGameHistory().add(this); 
+        System.out.println(winner.getName() + " has won the round! Player added to the Final!");
+    
     }
-    
-    
     
 }

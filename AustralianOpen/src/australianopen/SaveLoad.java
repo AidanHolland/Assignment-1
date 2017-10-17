@@ -6,7 +6,7 @@ import java.util.*;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 
-public class SaveLoad
+public class SaveLoad implements Serializable
 {
     String finder = "PLYR.txt";
     GameController gc = GameController.getInstance();
@@ -24,36 +24,21 @@ public class SaveLoad
     }
     
     public void save(String s, String path)
-    {
-        System.out.println("Enter filename");
+    {  
         FileOutputStream fout = null;
         ObjectOutputStream oos = null;
-        
-     
-        try
-        {
-            if(new File(path).isFile())
-            {
-                fout = new FileOutputStream(path, true);
-                oos = new ObjectOutputStream(fout);
-                oos.writeBytes(s);
-            }
-            else
-            {
-                fout = new FileOutputStream(path);
-                oos = new ObjectOutputStream(fout);
-                oos.writeBytes(s);
-            }
-        }      
-        catch(Exception e)
-        {
-            System.out.println("Exception caught, reason is: " + e);
+        try 
+        {    
+            File newTextFile = new File(path);
+            FileWriter fw = new FileWriter(newTextFile, true);
+            fw.write(s);
+            fw.append("\r\n");
+            fw.close();
         } 
-        finally
+        catch (IOException iox) 
         {
-           closeStreams(fout, oos);
-        } 
-        
+            iox.printStackTrace();
+        }
     }
     
   
@@ -71,14 +56,16 @@ public class SaveLoad
         ObjectOutputStream oos = null;
         try
         {
-            
             fout = new FileOutputStream(finder);
             oos = new ObjectOutputStream(fout);
-            for(int i = 0; i < p.size(); i++)
+            for(Player player: p)
             {
-                oos.writeObject(p.get(i));
+              oos.writeObject(player);
             }
-        }
+            fout.close();
+            oos.close();
+          }
+
         catch(Exception e)
         {
             System.out.println("Error is: " + e);
@@ -93,77 +80,75 @@ public class SaveLoad
     
   
     
-    public ArrayList<Player> loadPlayers() throws IOException, ClassNotFoundException
+
+	public ArrayList<Player> loadPlayers() 
     {   
         ArrayList<Player> loadedList = new ArrayList<Player>();
         ArrayList<Player> currentList = new ArrayList<Player>();
+        int tempID = 0;
+        FileInputStream fis;
+        ObjectInputStream ois;
         
         for(int i = 0; i < GameController.getInstance().getPlayers().size(); i++)
-        {
-            currentList.add(GameController.getInstance().getPlayers().get(i));     
+        {	
+            currentList.add(GameController.getInstance().getPlayers().get(i));  
         }
-      
+        
         try
         {
-            int tempID = 0;
-            boolean cont = true;
-            FileInputStream fis = new FileInputStream(finder);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            
-            //loadedList = (ArrayList<Player>) ois.readObject();
-            while(cont)
-            {
-                Object obj = null;
-                try
-                {
-                    obj = ois.readObject();
-                    if(obj != null)
-                    {
-                        
-                    }
-                    Player p = (Player) ois.readObject();
-                    loadedList.add(p);
-                }
-                catch(FileNotFoundException e)
-                {
-                }
-            }
-            
-            //Find any common instances in both lists
-            for(int i = 0; i < currentList.size(); i++)
-            {
-                for(int j = 0; j < loadedList.size(); j++)
-                {
-                    //Remove commons instances in loadedList
-                    if(currentList.get(i).getID() == loadedList.get(j).getID())
-                    {
-                        loadedList.remove(j);          
-                    }
-                }
-            }
-
-            //Add all remaining objects to currentList
-            for(int f = 0; f < loadedList.size(); f++)
-            {
-                currentList.add(loadedList.get(f));
-            }
-            for(int k = 0; k < currentList.size(); k++)
-            {
-                //Get largest ID to make sure we don't overwrite
-                if(currentList.get(k).getID() > tempID)
-                {
-                    tempID = currentList.get(k).getID();
-                }
-            }
-            Player.idCount = tempID;
+        	fis = new FileInputStream(finder);
+        	ois = new ObjectInputStream(fis);
+     
+           while(true)
+           {
+        	   Object obj = ois.readObject(); 
+        	   Player p = (Player)obj;
+        	   loadedList.add(p);
+           }
+        }
+        catch(EOFException eof)
+        {
+        	   
         }
         catch(Exception e)
         {
-            
+        	   e.printStackTrace();
         }
+        
+  
+        //Find any common instances in both lists
+        for(int i = 0; i < loadedList.size(); i++)
+        {
+            for(int j = 0; j < currentList.size(); j++)
+            {
+                //Remove commons instances in loadedList
+                if(currentList.get(i).getID() == loadedList.get(j).getID())
+                {
+                    loadedList.remove(j);          
+                }
+            }
+        }
+
+        //Add all remaining objects to currentList
+        for(int f = 0; f < loadedList.size(); f++)
+        {
+            currentList.add(loadedList.get(f));
+        }
+       
+        
+        for(int k = 0; k < loadedList.size(); k++)
+        {
+            //Get largest ID to make sure we don't overwrite
+            if(currentList.get(k).getID() > tempID)
+            {
+                tempID = currentList.get(k).getID();
+            }
+        }
+        Player.idCount = tempID;
+        
         return currentList;
     }
-    
+
   
     public void closeStreams(FileOutputStream fout, ObjectOutputStream oos)
     {
